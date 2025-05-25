@@ -1,7 +1,7 @@
 <H1>About Me</H1>
 <H2>My Interests</H2>
 
-1. I like to be watch anime
+1. I like to  watch anime
 
 ![I like to watch anime][anime]
 
