@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Mortgage Calculator</title>
 </head>
 <body>
@@ -25,26 +25,29 @@
         <button type="button" onclick="calculateMortgage()">Calculate</button>
     </form>
     <p id="result"></p>
-    
+
     <script>
         function calculateMortgage() {
+            // Get values and parse them to float
             const principal = parseFloat(document.getElementById("principal").value);
-            const rate = parseFloat(document.getElementById("rate").value) / 100 / 12; // monthly rate
+            const annualRate = parseFloat(document.getElementById("rate").value);
             const years = parseFloat(document.getElementById("years").value);
-            const months = years * 12;
 
-            if (isNaN(principal) || isNaN(rate) || isNaN(years)) {
+            // Validate inputs
+            if (isNaN(principal) || isNaN(annualRate) || isNaN(years)) {
                 document.getElementById("result").innerText = "Please enter valid numbers.";
                 return;
             }
 
+            const monthlyRate = annualRate / 100 / 12;
+            const totalPayments = years * 12;
             let monthlyPayment;
 
-            if (rate === 0) {
-                monthlyPayment = principal / months;
+            if (monthlyRate === 0) {
+                monthlyPayment = principal / totalPayments;
             } else {
-                const factor = Math.pow(1 + rate, months);
-                monthlyPayment = (principal * rate * factor) / (factor - 1);
+                const factor = Math.pow(1 + monthlyRate, totalPayments);
+                monthlyPayment = (principal * monthlyRate * factor) / (factor - 1);
             }
 
             document.getElementById("result").innerText =
